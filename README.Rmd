@@ -12,10 +12,10 @@ summarize in three sentences what this project is about and what central feature
 
 # Setup
 
-## Installing Packages
+## `renv`: Installing Packages
 `renv` brings project-local R dependency management to our project. `renv` uses a lockfile (`renv.lock`) to capture the state of your library at some point in time.
 Based on `renv.lock`, RStudio should automatically recognize that it's being needed, thereby downloading and installing the appropriate version of `renv` into the project library. After this has completed, you can then use `renv::restore()` to restore the project library locally on your machine.
-When new packages are used, `install.packages()` does not install packages globally, it does in an environment only used for our project. You can find this library in `renv/library`.
+When new packages are used, `install.packages()` does not install packages globally, it does in an environment only used for our project. You can find this library in `renv/library` (but it should not be necessary to look at it).
 If `renv` fails, you will be presented something in the like of when you first start R after cloning the repo:
 
 ```
@@ -25,7 +25,17 @@ This project has not yet been activated. Activating this project will ensure the
 
 Follow along with `Y`  and `renv::restore()` will do its work downloading and installing all dependencies.
 `renv` uses a local `.Rprofile` and `renv/activate.R` script to handle our project dependencies.
-If a developer adds a new package to a project, `renv::snapshot` updates the lockfile which triggers an update cascade, once committed and pushed to GitHub.
+
+### Adding a new package
+If you need to add a new package, you can install it as usual (`install.packages` etc.).
+Then, to add your package to the `renv.lock`:
+
+```
+renv::snapshot()
+```
+and commit and push your `renv.lock`.
+
+Other team members can then run `renv::restore()` to install the added package(s) on their laptop.
 
 ## Data
 

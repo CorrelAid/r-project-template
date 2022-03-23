@@ -8,7 +8,7 @@ features it has.
 
 # Setup
 
-## Installing Packages
+## `renv`: Installing Packages
 
 `renv` brings project-local R dependency management to our project.
 `renv` uses a lockfile (`renv.lock`) to capture the state of your
@@ -19,17 +19,28 @@ After this has completed, you can then use `renv::restore()` to restore
 the project library locally on your machine. When new packages are used,
 `install.packages()` does not install packages globally, it does in an
 environment only used for our project. You can find this library in
-`renv/library`. If `renv` fails, you will be presented something in the
-like of when you first start R after cloning the repo:
+`renv/library` (but it should not be necessary to look at it). If `renv`
+fails, you will be presented something in the like of when you first
+start R after cloning the repo:
 
     renv::restore()
     This project has not yet been activated. Activating this project will ensure the project library is used during restore. Please see ?renv::activate for more details. Would you like to activate this project before restore? [Y/n]:
 
 Follow along with `Y` and `renv::restore()` will do its work downloading
 and installing all dependencies. `renv` uses a local `.Rprofile` and
-`renv/activate.R` script to handle our project dependencies. If a
-developer adds a new package to a project, `renv::snapshot` updates the
-lockfile which triggers an update cascade, once checked-in.
+`renv/activate.R` script to handle our project dependencies.
+
+### Adding a new package
+
+If you need to add a new package, you can install it as usual
+(`install.packages` etc.). Then, to add your package to the `renv.lock`:
+
+    renv::snapshot()
+
+and commit and push your `renv.lock`.
+
+Other team members can then run `renv::restore()` to install the added
+package(s) on their laptop.
 
 ## Data
 
@@ -69,3 +80,5 @@ be honest about the limitations of your project, e.g.:
 -   methodological: maybe another model would be more suitable?
 -   reproducibility: what are limits of reproducibility? is there
     something hard-coded/specific to the data that you used?
+-   best practices: maybe some code is particularly messy and people
+    working on it in the future should know about it in advance?
