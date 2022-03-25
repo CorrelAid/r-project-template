@@ -49,6 +49,7 @@ system2("tree", c("data/raw")) # works on mac and potentially linux.
 [the following can also be moved to the wiki if you decide to have one]
 
 ## Definition of Done
+Default Definition of Done can be found [here](https://github.com/CorrelAid/definition-of-done). Adapt if needed.
 
 ## Code styling
 

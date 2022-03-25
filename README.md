@@ -57,6 +57,10 @@ one\]
 
 ## Definition of Done
 
+Default Definition of Done can be found
+[here](https://github.com/CorrelAid/definition-of-done). Adapt if
+needed.
+
 ## Code styling
 
 # How to operate this project?
